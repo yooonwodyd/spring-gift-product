@@ -1,17 +1,17 @@
 package gift;
 
-public class Gift {
+public class Product {
 	private Long id;
 	private String name;
 	private Long price;
 	private String imageUrl;
 
 	//of
-	public static Gift of(Long id, String name, Long price, String imageUrl) {
-		return new Gift(id, name, price, imageUrl);
+	public static Product of(Long id, String name, Long price, String imageUrl) {
+		return new Product(id, name, price, imageUrl);
 	}
 
-	private Gift(Long id, String name, Long price, String imageUrl) {
+	private Product(Long id, String name, Long price, String imageUrl) {
 		this.id = id;
 		this.name = name;
 		this.price = price;

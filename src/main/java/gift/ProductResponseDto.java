@@ -1,6 +1,6 @@
 package gift;
 
-public record GiftResponseDto(
+public record ProductResponseDto(
 	Long id,
 	String name,
 	Long price,
