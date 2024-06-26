@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+</head>
+<body>
+<h1>Product Management</h1>
+
+<h2>Products</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Image URL</th>
+    </tr>
+    </thead>
+    <tbody id="productTable">
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.imageUrl}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Manage Product</h2>
+<form id="productForm">
+    <label for="id">ID:</label>
+    <input type="text" id="id" name="id"><br>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price"><br>
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" name="imageUrl"><br>
+    <button type="button" onclick="registerProduct()">Register</button>
+    <button type="button" onclick="updateProduct()">Update</button>
+    <button type="button" onclick="deleteProduct()">Delete</button>
+</form>
+
+<script>
+    async function registerProduct() {
+        const id = document.getElementById('id').value;
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const imageUrl = document.getElementById('imageUrl').value;
+
+        const product = { id: parseInt(id), name, price: parseFloat(price), imageUrl };
+
+        try {
+            const response = await fetch('/api/product', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product)
+            });
+
+            if (response.ok) {
+                alert('Product registered successfully');
+                window.location.reload();
+            } else {
+                alert('Failed to register product');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred');
+        }
+    }
+
+    async function updateProduct() {
+        const id = document.getElementById('id').value;
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const imageUrl = document.getElementById('imageUrl').value;
+
+        const product = { id: parseInt(id), name, price: parseFloat(price), imageUrl };
+
+        try {
+            const response = await fetch(`/api/product/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(product)
+            });
+
+            if (response.ok) {
+                alert('Product updated successfully');
+                window.location.reload();
+            } else {
+                alert('Failed to update product');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred');
+        }
+    }
+
+    async function deleteProduct() {
+        const id = document.getElementById('id').value;
+
+        try {
+            const response = await fetch(`/api/product/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                alert('Product deleted successfully');
+                window.location.reload();
+            } else {
+                alert('Failed to delete product');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred');
+        }
+    }
+</script>
+</body>
+</html>
