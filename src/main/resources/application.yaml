@@ -1,5 +1,15 @@
-# database.properties
-jdbc.url=jdbc:mysql://localhost:3306/yourdatabase
-jdbc.username=yourusername
-jdbc.password=yourpassword
-jdbc.driverClassName=com.mysql.cj.jdbc.Driver
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+  sql:
+    init:
+      mode: always
+      schema-locations:
+        - classpath:schema.sql
