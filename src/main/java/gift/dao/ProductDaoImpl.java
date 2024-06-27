@@ -14,7 +14,7 @@ import gift.domain.Product;
 import gift.utils.JdbcUtils;
 
 @Repository
-public class ProductDAO {
+public class ProductDaoImpl implements ProductDao {
 
 	@Autowired
 	private JdbcUtils jdbcUtils;
@@ -91,6 +91,22 @@ public class ProductDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException("Error updating product", e);
+		}
+	}
+
+	// delete
+	public void deleteById(Long id) {
+		String sql = "DELETE FROM products WHERE id = ?";
+
+		try (Connection conn = jdbcUtils.getConnection();
+			 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setLong(1, id);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Error deleting product", e);
 		}
 	}
 }
