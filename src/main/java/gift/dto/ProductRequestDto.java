@@ -1,4 +1,6 @@
-package gift;
+package gift.dto;
+
+import gift.domain.Product;
 
 public record ProductRequestDto(
 	Long id,
