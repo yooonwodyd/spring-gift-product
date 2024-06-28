@@ -1,15 +1,14 @@
-package gift;
+package gift.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import gift.dao.ProductDao;
-import gift.dao.ProductRowMapper;
+import java.util.Optional;
 import gift.domain.Product;
 
 @Repository
-public class ProductDaoImpl implements ProductDao {
+public class ProductRepositoryImpl implements ProductRepository {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
@@ -21,9 +20,10 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public Product findById(Long id) {
+	public Optional<Product> findById(Long id) {
 		String sql = "SELECT * FROM products WHERE id = ?";
-		return jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProductRowMapper());
+		List<Product> products = jdbcTemplate.query(sql, new Object[]{id}, new ProductRowMapper());
+		return products.stream().findFirst();
 	}
 
 	@Override
