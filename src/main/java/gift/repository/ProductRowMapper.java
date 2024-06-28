@@ -1,4 +1,4 @@
-package gift.dao;
+package gift.repository;
 
 import org.springframework.jdbc.core.RowMapper;
 import gift.domain.Product;
