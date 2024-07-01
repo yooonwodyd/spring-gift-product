@@ -65,7 +65,7 @@
         const product = { id: parseInt(id), name, price: parseFloat(price), imageUrl };
 
         try {
-            const response = await fetch('/api/product', {
+            const response = await fetch('/api/v1/product', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(product)
@@ -92,7 +92,7 @@
         const product = { id: parseInt(id), name, price: parseFloat(price), imageUrl };
 
         try {
-            const response = await fetch(`/api/product/${id}`, {
+            const response = await fetch(`/api/v1/product/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(product)
@@ -114,7 +114,7 @@
         const id = document.getElementById('id').value;
 
         try {
-            const response = await fetch(`/api/product/${id}`, {
+            const response = await fetch(`/api/v1/product/${id}`, {
                 method: 'DELETE'
             });
 
