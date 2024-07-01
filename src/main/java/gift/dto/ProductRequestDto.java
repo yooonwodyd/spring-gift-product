@@ -8,7 +8,7 @@ public record ProductRequestDto(
 	Long price,
 	String imageUrl
 ) {
-	//toEntity
+
 	public Product toEntity() {
 		return Product.of(id, name, price, imageUrl);
 	}

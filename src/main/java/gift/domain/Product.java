@@ -2,15 +2,21 @@ package gift.domain;
 
 import java.util.Objects;
 
+import gift.dto.ProductResponseDto;
+
 public class Product {
 	private Long id;
 	private String name;
 	private Long price;
 	private String imageUrl;
 
-	//of
 	public static Product of(Long id, String name, Long price, String imageUrl) {
 		return new Product(id, name, price, imageUrl);
+	}
+
+	public static Product from(ProductResponseDto productResponseDto) {
+		return new Product(productResponseDto.id(), productResponseDto.name(), productResponseDto.price(),
+			productResponseDto.imageUrl());
 	}
 
 	private Product(Long id, String name, Long price, String imageUrl) {
@@ -19,6 +25,7 @@ public class Product {
 		this.price = price;
 		this.imageUrl = imageUrl;
 	}
+
 
 	public Long getId() {
 		return id;
